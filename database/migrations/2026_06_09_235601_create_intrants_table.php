@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string("categorie");
             $table->decimal("quantiteDisponible",8,3);
-            $table->string("type");
             $table->timestamps();
         });
     }

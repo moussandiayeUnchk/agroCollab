@@ -1,6 +1,9 @@
-@extends("layouts.app")
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ ('Dashboard') }}
+        </h2>
+    </x-slot>
 
-
-<div class="bg-red-400 w-full">
-    <p class="text-3xl font-bold underline">Bonjour</p>
-</div>
+   
+</x-app-layout>

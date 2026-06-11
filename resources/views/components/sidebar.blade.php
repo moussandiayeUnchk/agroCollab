@@ -12,7 +12,7 @@
         <nav class="flex-1 mt-8  space-y-6 ml-4">
 
             <!-- injection du composant qu'on aréé dans le dossier component nav-link.blade.php -->
-            <x-nav-link href="/" :active="request()->is('dashboard')" class="flex items-center space-x-2 text-xl ">
+            <x-nav-link href="/dashboard" :active="request()->is('dashboard')" class="flex items-center space-x-2 text-xl ">
                 <span>📊</span>
                 <span>Tableau de bord</span>
 
