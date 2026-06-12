@@ -151,9 +151,9 @@
                         @forelse($intrants as $intrant)
                             @php
                                 /* 
-                                    on calcule le pourcentage mais d'abord on sécurise le stock initial en faisant
+                                                                    on calcule le pourcentage mais d'abord on sécurise le stock initial en faisant
                                     si le stock initial est > 0 alors on garde la valeur c'est à dire le stock initial
-                                    de départ par contre si c'est < 0 alors on lui donne une valeur par défaut = 1
+                                                                    de départ par contre si c'est < 0 alors on lui donne une valeur par défaut = 1
                                     car un nombre ne peut pas être divisé par 0 or ici on cherche à calculer le %
                                     )
 
@@ -183,16 +183,44 @@ $couleurBarre = $pourcentage < 30 ? 'bg-red-600' : 'bg-emerald-600';
                                 </div>
                             </div>
 
-                            @empty
-                                <p class="text-center text-gray-400 py-4 text-sm">Aucun intrant en stock.</p>
+                        @empty
+                            <p class="text-center text-gray-400 py-4 text-sm">Aucun intrant en stock.</p>
                         @endforelse
 
                     </div>
 
 
+                    
+                    <!-- actions rapides comme Enregistrer un apport ou ajouter un membre  -->
+                    <div class="md:col-span-4 rounded-xl border-2 border-solid shadow-xl p-4  border-gray-200 h-80">
+                        <div class="mb-6">
+                            <h3 class="text-lg font-bold text-gray-900">Actions Rapides</h3>
+                            <p class="text-xs text-gray-400 font-medium mt-0.5">Opérations fréquentes</p>
+                        </div>
 
-                    <div class="md:col-span-4 rounded-xl border-2 border-solid shadow-xl   border-gray-200">
+                        <div class="space-y-4">
+                            <a href="#"
+                                class="flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 rounded-xl group transition-colors">
+                                <div>
+                                    <h4 class="font-bold text-emerald-600 text-sm group-hover:text-emerald-700">
+                                        Enregistrer un apport</h4>
+                                    <p class="text-xs text-gray-400 font-medium mt-0.5">Nouvelle entrée récolte</p>
+                                </div>
+                                <span
+                                    class="text-emerald-600 text-xl font-bold group-hover:translate-x-1 transition-transform">→</span>
+                            </a>
 
+                            <a href="#"
+                                class="flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 rounded-xl group transition-colors">
+                                <div>
+                                    <h4 class="font-bold text-emerald-600 text-sm group-hover:text-emerald-700">Ajouter
+                                        un membre</h4>
+                                    <p class="text-xs text-gray-400 font-medium mt-0.5">Nouveau coopérateur</p>
+                                </div>
+                                <span
+                                    class="text-emerald-600 text-xl font-bold group-hover:translate-x-1 transition-transform">→</span>
+                            </a>
+                        </div>
                     </div>
 
 
