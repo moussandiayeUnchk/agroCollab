@@ -39,10 +39,14 @@ class DashBoardController extends Controller
         ->take(5) // on prend les 5 derniers
         ->get();
 
+        // on récuprère les réservations
         $reservations = Reservation::with('user','materiel')
         ->latest()
         ->take(4)
         ->get();
+
+        // on récuprère les intrants
+        $intrants=Intrant::all();
 
         return view('dashboard',compact(
           'totalMembres',
@@ -51,7 +55,8 @@ class DashBoardController extends Controller
           'materielsDisponible',
           'alerteStock',
           'derniereRecoltes',
-          'reservations'
+          'reservations',
+          'intrants'
           
         ));
 

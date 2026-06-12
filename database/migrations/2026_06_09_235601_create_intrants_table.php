@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('intrants', function (Blueprint $table) {
             $table->id();
             $table->string("categorie");
-            $table->decimal("quantiteDisponible",8,3);
+            $table->integer('stock_initial')->default(1);
+            $table->decimal("quantiteDisponible",8,1);
             $table->timestamps();
         });
     }

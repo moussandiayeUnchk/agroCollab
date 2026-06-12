@@ -17,6 +17,10 @@ class IntrantFactory extends Factory
      */
     public function definition(): array
     {
+        // On définit d'abord un stock de départ 
+        $stockInitial = fake()->randomElement([100, 200, 300, 500]);
+
+
         $categoriesIntrant=[
             'semence', 
             'engrais', 
@@ -25,7 +29,9 @@ class IntrantFactory extends Factory
         ];
         return [
             'categorie'=>fake()->randomElement($categoriesIntrant),
-            'quantiteDisponible'=>fake()->randomFloat(1,0.5,5.5),
+            'stock_initial' => $stockInitial,
+            // La quantité disponible sera un nombre aléatoire entre 10kg et le stock initial maximum
+            'quantiteDisponible'=>fake()->numberBetween(10,$stockInitial),
         ];
     }
 }
