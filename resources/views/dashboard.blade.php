@@ -41,7 +41,7 @@
             <p class="text-gray-400">Suivi et validation des déclarations</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-12 mt-6">
+        <div class="grid grid-cols-1 md:grid-cols-12 mt-6 space-x-6">
             <!-- affichage des dernières récoltes. -->
             <div class="md:col-span-8">
 
@@ -71,7 +71,7 @@
                                             class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700">Validée</span>
                                     </td>
                                 </tr>
-                              
+
                             @empty
                                 <tr>
                                     <td colspan="5" class="py-6 text-center text-gray-400">Aucune récolte enregistrée
@@ -86,7 +86,50 @@
 
 
             <!-- infos sur les réservations -->
-            <div class="md:col-span-4">
+            <div class="md:col-span-4 rounded-xl border-2 border-solid shadow-xl   border-gray-200 ">
+                <div class="pb-4 p-4 flex justify-between items-center border-b border-gray-200  ">
+                    <p class="font-bold">Réservations Matériel</p>
+                    <span class="px-3 py-1 bg-emerald-600 text-white text-md font-bold rounded-lg ">Aujourd'hui</span>
+                </div>
+
+                <!-- affichage des 5 dernières réservations efféctuée avec leurs statut -->
+                @forelse ($reservations as  $reservation)
+                    <div class="flex p-4 items-center justify-between   border-b border-gray-200">
+                        <div class="flex flex-col">
+                            <p class="font-bold">{{ $reservation->materiel->nom }}</p>
+                            <p class="font-bold text-gray-400">{{ $reservation->user->nom }}</p>
+                        </div>
+
+                        @if ($reservation->statut === 'En cours')
+                            <span
+                                class="bg-green-100 font-bold text-emerald-700 text-sm  px-4 py-1.5 h-6 flex items-center text-center rounded-full">
+                                En cours
+                            </span>
+                        @elseif($reservation->statut === 'Terminé')
+                            <span
+                                class="bg-gray-100 font-bold text-gray-600 text-sm  px-4 py-1.5 h-6 flex items-center text-center rounded-full">
+                                Terminé
+                            </span>
+                        @else
+                            <span
+                                class="bg-orange-50 font-bold text-orange-600 text-sm  px-4 py-1.5 h-6 flex items-center text-center rounded-full">
+                                Planifié
+                            </span>
+                        @endif
+                        
+                    </div>
+
+                @empty
+                    <div>
+                        <p>Pas de Réservation disponible</p>
+                    </div>
+                @endforelse
+                
+                <div class="p-4 text-center font-bold text-emerald-600">
+                    <a href="">
+                            Voir toutes les réservations →
+                        </a>
+                </div>
 
             </div>
 

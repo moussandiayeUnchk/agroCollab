@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Intrant;
 use App\Models\Materiel;
 use App\Models\Recolte;
+use App\Models\Reservation;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -38,6 +39,10 @@ class DashBoardController extends Controller
         ->take(5) // on prend les 5 derniers
         ->get();
 
+        $reservations = Reservation::with('user','materiel')
+        ->latest()
+        ->take(4)
+        ->get();
 
         return view('dashboard',compact(
           'totalMembres',
@@ -45,7 +50,8 @@ class DashBoardController extends Controller
           'totalMateriels',
           'materielsDisponible',
           'alerteStock',
-          'derniereRecoltes'
+          'derniereRecoltes',
+          'reservations'
           
         ));
 
