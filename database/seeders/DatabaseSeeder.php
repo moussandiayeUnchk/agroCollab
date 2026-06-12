@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Intrant;
 use App\Models\Materiel;
 use App\Models\Recolte;
+use App\Models\Reservation;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -49,7 +50,7 @@ class DatabaseSeeder extends Seeder
         ];
 
         // on créé 10 membres fictifs et pour chaque membre générer des récoltes aléatoires
-        User::factory(10)->create()->each(function ($user) use ($categories){
+        $agriculteurs=  User::factory(10)->create()->each(function ($user) use ($categories){
             Recolte::factory(rand(2,5))->create([
                 'user_id'=>$user->id,
                 'quantity'=>fake()->randomFloat(1,0.5,2.5), //poids aléatoire entre 0.5 et 2.5
@@ -59,7 +60,7 @@ class DatabaseSeeder extends Seeder
 
 
         //créer quelques matériels pour le test
-        Materiel::factory(7)->create();
+        $materiels = Materiel::factory(7)->create();
 
 
         // création de donnée fictifs pour les intrants
@@ -74,6 +75,17 @@ class DatabaseSeeder extends Seeder
             'quantiteDisponible'=>fake()->randomFloat(1,0.5,5.5),
             'categorie'=>fake()->randomElement($categoriesIntrant)
         ]);
+
+
+        // 4. Générer 15 Réservations croisées aléatoirement
+        for ($i = 0; $i < 15; $i++) {
+            Reservation::factory()->create([
+                // On pioche un ID au hasard parmi nos 10 agriculteurs
+                'user_id' => $agriculteurs->random()->id,
+                // On pioche un ID au hasard parmi nos 7 matériels
+                'materiel_id' => $materiels->random()->id,
+            ]);
+        }
         
     }
 }

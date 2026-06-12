@@ -33,4 +33,9 @@ class User extends Authenticatable
     public function recoltes(){
         return $this->hasMany(Recolte::class);
     }
+
+
+    public function reservations(){
+        return $this->hasMany(Reservation::class);
+    }
 }

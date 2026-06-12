@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->date("date_debut");
             $table->date("date_fin");
-            $table->boolean("statut");
+            $table->string('statut')->default('Planifié');;
             $table->foreignIdFor(User::class)->constrained();
             $table->foreignIdFor(Materiel::class)->constrained();
             $table->timestamps();
