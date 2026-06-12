@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
             'nom'=>"admin",
             'prenom'=>"admin",
             'adresse'=>'dakar',
-            'email'=>"admin20032@gmail.com",
+            'email'=>"admin20038@gmail.com",
             'password'=>Hash::make("Azerty2026"), // on crypte le mot de pass 
             'num_tel'=>767940477
         ]);
