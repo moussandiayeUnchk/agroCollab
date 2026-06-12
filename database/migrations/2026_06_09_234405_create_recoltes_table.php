@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('recoltes', function (Blueprint $table) {
             $table->id();
             $table->string("categorieProduction");
-            $table->decimal('quantity', 8, 3);
+            $table->decimal('quantity', 8, 1);
             $table->foreignIdFor(User::class)->constrained();
             $table->timestamps();
         });

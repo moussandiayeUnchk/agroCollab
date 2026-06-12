@@ -19,7 +19,7 @@ class RecolteFactory extends Factory
     {
         return [
 
-            'quantity' => fake()->randomFloat(1, 0.5, 2.5),
+            'quantity' => fake()->randomFloat(1, 0.5, 4.5),
 
             'categorieProduction' => fake()->randomElement([
 

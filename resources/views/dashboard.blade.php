@@ -62,7 +62,8 @@
                             @forelse ($derniereRecoltes as $recolte)
                                 <tr>
                                     <td class="py-4 px-4 text-gray-500">
-                                        {{ $recolte->created_at->translatedFormat('j F Y') }}</td>
+                                        {{ $recolte->created_at->translatedFormat('j F Y') }}
+                                    </td>
                                     <td class="py-4 px-4 text-gray-900 font-semibold">{{ $recolte->user->nom }}p</td>
                                     <td class="py-4 px-4">{{ $recolte->categorieProduction }}</td>
                                     <td class="py-4 px-4 font-bold">{{ $recolte->quantity }}</td>
@@ -93,7 +94,7 @@
                 </div>
 
                 <!-- affichage des 5 dernières réservations efféctuée avec leurs statut -->
-                @forelse ($reservations as  $reservation)
+                @forelse ($reservations as $reservation)
                     <div class="flex p-4 items-center justify-between   border-b border-gray-200">
                         <div class="flex flex-col">
                             <p class="font-bold">{{ $reservation->materiel->nom }}</p>
@@ -116,7 +117,7 @@
                                 Planifié
                             </span>
                         @endif
-                        
+
                     </div>
 
                 @empty
@@ -124,15 +125,76 @@
                         <p>Pas de Réservation disponible</p>
                     </div>
                 @endforelse
-                
+
                 <div class="p-4 text-center font-bold text-emerald-600">
                     <a href="">
-                            Voir toutes les réservations →
-                        </a>
+                        Voir toutes les réservations →
+                    </a>
                 </div>
 
             </div>
 
         </div>
 
+
+        <! -- informations sur l'état des stocks et raccourci pour effectuer des actions rapides -->
+            <div class="grid grid-cols-1 md:grid-cols-12 mt-12 space-x-6 ">
+                <! -- informations sur l'état des stocks -->
+                    <div class="md:col-span-8 rounded-xl border-2 border-solid shadow-xl p-4   border-gray-200">
+                        <div class="flex justify-between p-4 items-center border-b border-gray-200">
+                            <p class="font-bold">État des stocks</p>
+                            <div class="bg-emerald-600 text-white text-md font-bold rounded-xl p-2">
+                                <a href="">Voir tout</a>
+                            </div>
+                        </div>
+                        <!-- on affiche les intrants -->
+                        @forelse($intrants as $intrant)
+                            @php
+                                /* 
+                                    on calcule le pourcentage mais d'abord on sécurise le stock initial en faisant
+                                    si le stock initial est > 0 alors on garde la valeur c'est à dire le stock initial
+                                    de départ par contre si c'est < 0 alors on lui donne une valeur par défaut = 1
+                                    car un nombre ne peut pas être divisé par 0 or ici on cherche à calculer le %
+                                    )
+
+
+                                    */
+$stockInitial = $intrant->stock_initial > 0 ? $intrant->stock_initial : 1;
+// on compare les 2 nombres et on renvoie le plus petit pour éviter que ça dépasse 100
+$pourcentage = min(($intrant->quantiteDisponible / $stockInitial) * 100, 100);
+
+// Alerte rouge si le stock descend en dessous de 30% du stock de départ
+$couleurBarre = $pourcentage < 30 ? 'bg-red-600' : 'bg-emerald-600';
+                            @endphp
+
+                            <div class="mb-5 mt-6">
+                                <div class="flex justify-between items-center text-sm mb-2">
+                                    <span class="font-bold text-gray-900">{{ $intrant->categorie }}</span>
+                                    <span class="font-bold text-gray-900">
+                                        {{ $intrant->quantiteDisponible }}kg
+                                        <span class="text-gray-400 font-medium">/ {{ $intrant->stock_initial }}
+                                            kg</span>
+                                    </span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-4">
+                                    <!-- La jauge s'adapte maintenant au vrai ratio de chaque produit -->
+                                    <div class="{{ $couleurBarre }} h-4 rounded-full transition-all duration-500"
+                                        style="width: {{ $pourcentage }}%"></div>
+                                </div>
+                            </div>
+
+                            @empty
+                                <p class="text-center text-gray-400 py-4 text-sm">Aucun intrant en stock.</p>
+                        @endforelse
+
+                    </div>
+
+
+
+                    <div class="md:col-span-4 rounded-xl border-2 border-solid shadow-xl   border-gray-200">
+
+                    </div>
+
+
+            </div>
 </x-app-layout>
