@@ -31,12 +31,21 @@ class DashBoardController extends Controller
 
         $alerteStock = Intrant::where('quantiteDisponible','<',20)->count();
 
+        // on récuprère les dernières récoltes enregistées avec l'agriculteur associé
+
+        $derniereRecoltes = Recolte::with('user') // on évite le problème du N+1
+        ->latest() // du plus récent au plus anciens
+        ->take(5) // on prend les 5 derniers
+        ->get();
+
+
         return view('dashboard',compact(
           'totalMembres',
           'totalRecoltes',
           'totalMateriels',
           'materielsDisponible',
           'alerteStock',
+          'derniereRecoltes'
           
         ));
 
