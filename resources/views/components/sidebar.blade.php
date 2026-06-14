@@ -1,59 +1,36 @@
+<aside class="w-72 bg-[#079669] flex flex-col min-h-screen shadow-lg">
 
+    <div class="mt-6 ml-6 mb-2">
+        <h1 class="font-black text-white text-3xl tracking-wide">AgroCollab</h1>
+    </div>
 
-    <!-- la barre latérale (sidebar) -->
-    <aside class="w-70 bg-[#079669] flex flex-col min-h-screen">
+    <nav class="flex-1 mt-8 space-y-2 px-4">
 
-        <!-- Entête nom du projet -->
-        <div class="mt-4 ml-4">
-            <h1 class="font-bold text-white text-3xl">AgroCollab</h1>
-        </div>
+        <x-nav-link href="dashboard" :active="request()->routeIs('dashboard')">
+            <span>📊</span>
+            <span>Tableau de bord</span>
+        </x-nav-link>
 
-        <!-- lien de navigation -->
-        <nav class="flex-1 mt-8  space-y-6 ml-4">
+        <x-nav-link :href="route('membres.index')" :active="request()->routeIs('membres.*')">
+            <span>👥</span>
+            <span>Membres</span>
+        </x-nav-link>
 
-            <!-- injection du composant qu'on aréé dans le dossier component nav-link.blade.php -->
-            <x-nav-link href="/dashboard" :active="request()->is('dashboard')" class="flex items-center space-x-2 text-xl ">
-                <span>📊</span>
-                <span>Tableau de bord</span>
+        <x-nav-link href="" :active="request()->routeIs('intrants*')">
+            <span>📦</span>
+            <span>Stocks</span>
+        </x-nav-link>
 
-            </x-nav-link>
+        <x-nav-link href="" :active="request()->routeIs('materiels*')">
+            <span>🚜</span>
+            <span>Matériels</span>
+        </x-nav-link>
 
+        <x-nav-link href="" :active="request()->routeIs('recoltes*')">
+            <span>🌾</span>
+            <span>Récoltes</span>
+        </x-nav-link>
 
-            <x-nav-link href="/" :active="request()->is('dashboard')" class="flex items-center space-x-2 text-xl">
-                <span>👥</span>
-                <span>Membres</span>
+    </nav>
 
-            </x-nav-link>
-
-
-            <x-nav-link href="/" :active="request()->is('dashboard')" class="flex items-center space-x-2 text-xl">
-                <span>📦</span>
-                <span>Stocks</span>
-
-            </x-nav-link>
-
-
-            <x-nav-link href="/" :active="request()->is('dashboard')" class="flex items-center space-x-2 text-xl">
-                <span>🚜</span>
-                <span>Matériels</span>
-
-            </x-nav-link>
-
-
-            <x-nav-link href="/" :active="request()->is('dashboard')"  class="flex items-center space-x-2 text-xl">
-                <span>🌾</span>
-                <span>Récoltes</span>
-
-            </x-nav-link>
-
-
-
-
-
-
-
-
-
-        </nav>
-
-    </aside>
+</aside>

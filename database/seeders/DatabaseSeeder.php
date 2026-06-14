@@ -34,7 +34,8 @@ class DatabaseSeeder extends Seeder
             'adresse'=>'dakar',
             'email'=>"admin20038@gmail.com",
             'password'=>Hash::make("Azerty2026"), // on crypte le mot de pass 
-            'num_tel'=>767940477
+            'num_tel'=>767940477,
+            'role' => 'admin',
         ]);
 
         // catégorie pour le type de production
@@ -50,7 +51,7 @@ class DatabaseSeeder extends Seeder
         ];
 
         // on créé 10 membres fictifs et pour chaque membre générer des récoltes aléatoires
-        $agriculteurs=  User::factory(10)->create()->each(function ($user) use ($categories){
+        $agriculteurs=  User::factory(10)->create(['role' => 'membre','password' => Hash::make('password')])->each(function ($user) use ($categories){
             Recolte::factory(rand(2,5))->create([
                 'user_id'=>$user->id,
                 'quantity'=>fake()->randomFloat(1,0.5,2.5), //poids aléatoire entre 0.5 et 2.5

@@ -20,8 +20,11 @@ return new class extends Migration
             $table->string('adresse');
             $table->integer('num_tel');
             $table->string('password');
+            // Ajout du rôle : 'membre' par défaut, 'admin' pour le gestionnaire
+            $table->string('role')->default('membre');
             $table->rememberToken();
             $table->timestamps();
+
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string("categorieProduction");
             $table->decimal('quantity', 8, 1);
-            $table->foreignIdFor(User::class)->constrained();
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
