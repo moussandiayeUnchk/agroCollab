@@ -2,14 +2,16 @@
 
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('dashboard');
+}); 
 
 Route::get('/dashboard',[DashBoardController::class,'index'])->middleware(['auth','verified'])->name('dashboard');
 
+Route::resource('/membres', UserController::class)->middleware(['auth', 'verified']);
 /*Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');  */

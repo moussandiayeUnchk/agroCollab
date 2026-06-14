@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date("date_debut");
             $table->date("date_fin");
             $table->string('statut')->default('Planifié');;
-            $table->foreignIdFor(User::class)->constrained();
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Materiel::class)->constrained();
             $table->timestamps();
         });
