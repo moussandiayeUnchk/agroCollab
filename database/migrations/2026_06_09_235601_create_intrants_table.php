@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('intrants', function (Blueprint $table) {
             $table->id();
+            $table->string('nom');
             $table->string("categorie");
-            $table->integer('stock_initial')->default(1);
+            // Quantité enregistrée lors de la toute première création
+            $table->decimal('stock_initial', 8, 2)->default(0.00);
+            // Quantité qui évolue au fil des réapprovisionnements et des distributions
             $table->decimal("quantiteDisponible",8,1);
             $table->timestamps();
         });

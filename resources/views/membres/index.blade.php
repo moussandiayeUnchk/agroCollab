@@ -19,6 +19,40 @@
 
     </div>
 
+    @if (session('success'))
+        <div id="flash-success"
+            class="mb-6 flex items-center p-4 text-emerald-800 bg-emerald-50 border-l-4 border-emerald-500 rounded-r-lg shadow-sm transition-opacity duration-500">
+            <svg class="w-5 h-5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"></path>
+            </svg>
+
+            <div class="text-sm font-semibold">
+                {{ session('success') }}
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const alertBox = document.getElementById('flash-success');
+                if (alertBox) {
+                    setTimeout(() => {
+                        // 1. On lance une transition d'opacité pour l'effet fluide
+                        alertBox.style.opacity = '0';
+
+                        // 2. On retire complètement l'élément du DOM après la fin de l'animation (500ms)
+                        setTimeout(() => {
+                            alertBox.remove();
+                        }, 500);
+                    }, 4000); // 4000 millisecondes = 4 secondes de visibilité
+                }
+            });
+        </script>
+    @endif
+
+
+
     <!-- affichage de la liste des Membres -->
     <table class="w-full text-left border-collapse mt-14">
         <thead>
@@ -74,15 +108,17 @@
         </tbody>
     </table>
     <script>
-    function confirmerSuppression(button) {
-        // Sélectionner le formulaire parent du bouton cliqué
-        const form = button.closest('.form-delete');
-        
-        // Utilisation d'une boîte de dialogue native mais propre
-        // (Tu pourras remplacer par un modal Tailwind si tu veux le styliser à 100%)
-        if (confirm("⚠️ ATTENTION : Êtes-vous sûr de vouloir supprimer définitivement ce membre ?\n\nCette action est irréversible et annulera ses accès à AgroCollab.")) {
-            form.submit();
+        function confirmerSuppression(button) {
+            // Sélectionner le formulaire parent du bouton cliqué
+            const form = button.closest('.form-delete');
+
+            // Utilisation d'une boîte de dialogue native mais propre
+            // (Tu pourras remplacer par un modal Tailwind si tu veux le styliser à 100%)
+            if (confirm(
+                    "⚠️ ATTENTION : Êtes-vous sûr de vouloir supprimer définitivement ce membre ?\n\nCette action est irréversible et annulera ses accès à AgroCollab."
+                    )) {
+                form.submit();
+            }
         }
-    }
-</script>
+    </script>
 </x-app-layout>

@@ -72,10 +72,19 @@ class DatabaseSeeder extends Seeder
             'autre'
         ];
 
+        $noms=[
+            'Semences de maïs hybride',
+            'Engrais NPK 15-15-15',
+            'Herbicide systémique',
+            'Amendement calcaire (Chaux)',
+        ];
+
         Intrant::factory(10)->create([
+            'nom'=>fake()->randomElement($noms),
             'quantiteDisponible'=>fake()->randomFloat(1,0.5,5.5),
             'categorie'=>fake()->randomElement($categoriesIntrant)
         ]);
+
 
 
         // 4. Générer 15 Réservations croisées aléatoirement
