@@ -16,7 +16,7 @@
             <span>Membres</span>
         </x-nav-link>
 
-        <x-nav-link href="" :active="request()->routeIs('intrants*')">
+        <x-nav-link :href="route('intrants.index')" :active="request()->routeIs('intrants.*')">
             <span>📦</span>
             <span>Stocks</span>
         </x-nav-link>
