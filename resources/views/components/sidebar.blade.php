@@ -21,7 +21,7 @@
             <span>Stocks</span>
         </x-nav-link>
 
-        <x-nav-link href="" :active="request()->routeIs('materiels*')">
+        <x-nav-link :href="route('materiels.index')" :active="request()->routeIs('materiels*')">
             <span>🚜</span>
             <span>Matériels</span>
         </x-nav-link>

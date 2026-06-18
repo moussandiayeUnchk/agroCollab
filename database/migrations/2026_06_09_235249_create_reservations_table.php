@@ -17,9 +17,10 @@ return new class extends Migration
             $table->id();
             $table->date("date_debut");
             $table->date("date_fin");
-            $table->string('statut')->default('Planifié');;
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Materiel::class)->constrained();
+            $table->foreignIdFor(Materiel::class)->constrained()->cascadeOnDelete();
+            // Statut de la demande (Par défaut 'En attente' lors de la réservation)
+            $table->string('statut')->default('En cours'); // En cours, Terminée
             $table->timestamps();
         });
     }

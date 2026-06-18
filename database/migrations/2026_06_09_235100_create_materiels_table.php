@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('materiels', function (Blueprint $table) {
             $table->id();
             $table->string("nom");
-            $table->boolean("estDisponible");
+            $table->boolean("estDisponible")->default(true);
             $table->timestamps();
         });
     }

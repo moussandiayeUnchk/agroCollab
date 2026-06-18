@@ -15,4 +15,11 @@ class Materiel extends Model
     public function reservations(){
         return $this->hasMany(Reservation::class);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'reservations')
+                ->withPivot('id', 'date_debut', 'date_fin', 'statut')
+                ->withTimestamps();
+    }
 }

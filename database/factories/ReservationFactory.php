@@ -29,7 +29,7 @@ class ReservationFactory extends Factory
             'materiel_id' => Materiel::factory(), // Sera écrasé dans le Seeder
             'date_debut' => $dateDebut->format('Y-m-d'),
             'date_fin' => $dateFin->format('Y-m-d'),
-            'statut' => fake()->randomElement(['En cours', 'Terminé', 'Planifié']),
+            'statut' => fake()->randomElement(['En cours', 'Terminé']),
         ];
     }
 }
