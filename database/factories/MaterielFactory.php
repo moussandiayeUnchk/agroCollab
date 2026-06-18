@@ -25,11 +25,7 @@ class MaterielFactory extends Factory
 
                 'Motoculteur',
 
-                'Moissonneuse',
-
-                'Pulvérisateur',
-
-                'Charrue'
+                'Moissonneuse'
 
             ]),
 

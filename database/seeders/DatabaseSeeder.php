@@ -61,7 +61,14 @@ class DatabaseSeeder extends Seeder
 
 
         //créer quelques matériels pour le test
-        $materiels = Materiel::factory(7)->create();
+        // Dans ton Seeder
+        $materiels = Materiel::factory(3)
+             ->sequence(
+                ['nom' => 'Tracteur',     'estDisponible' => true],
+                ['nom' => 'Motoculteur',  'estDisponible' => false],
+                ['nom' => 'Moissonneuse', 'estDisponible' => true],
+             )
+            ->create();
 
 
         // création de donnée fictifs pour les intrants

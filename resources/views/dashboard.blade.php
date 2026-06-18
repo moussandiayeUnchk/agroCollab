@@ -106,15 +106,11 @@
                                 class="bg-green-100 font-bold text-emerald-700 text-sm  px-4 py-1.5 h-6 flex items-center text-center rounded-full">
                                 En cours
                             </span>
-                        @elseif($reservation->statut === 'Terminé')
-                            <span
-                                class="bg-gray-100 font-bold text-gray-600 text-sm  px-4 py-1.5 h-6 flex items-center text-center rounded-full">
-                                Terminé
-                            </span>
+                        
                         @else
                             <span
-                                class="bg-orange-50 font-bold text-orange-600 text-sm  px-4 py-1.5 h-6 flex items-center text-center rounded-full">
-                                Planifié
+                                class="bg-red-50 font-bold text-red-600 text-sm  px-4 py-1.5 h-6 flex items-center text-center rounded-full">
+                                Terminé
                             </span>
                         @endif
 
