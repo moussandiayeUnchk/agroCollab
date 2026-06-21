@@ -62,7 +62,7 @@
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-100 border-t border-gray-100 font-medium text-gray-900">
-                
+
                 @forelse ($intrants as $intrant)
                     <tr class="hover:bg-gray-50 transition-colors">
                         <td class="px-6 py-4 font-bold text-gray-900">
@@ -92,21 +92,30 @@
                             {{ number_format($intrant->quantiteDisponible, 1) }} kg
                         </td>
 
-                        <td class="px-6 py-4 text-right space-x-2">
-                            <a href="{{ route('intrants.reappro.form', $intrant->id) }}"
-                                class="inline-flex items-center px-3 py-1.5 bg-[#079669] hover:bg-[#047857] text-white text-xs font-bold rounded-md transition-colors shadow-sm">
-                                Réappro.
-                            </a>
+                        <td class="px-6 py-4 text-right space-x-2 whitespace-nowrap">
+                            @if (auth()->user()->role === 'admin')
+                                {{-- Actions visibles uniquement pour l'admin --}}
+                                <a href="{{ route('intrants.reappro.form', $intrant->id) }}"
+                                    class="inline-flex items-center px-3 py-1.5 bg-[#079669] hover:bg-[#047857] text-white text-xs font-bold rounded-md transition-colors shadow-sm">
+                                    Réappro.
+                                </a>
 
-                            <form action="{{ route('intrants.destroy', $intrant->id) }}" method="POST"
-                                class="form-delete-intrant inline-block">
-                                @csrf
-                                @method('DELETE')
-                                <button type="button" onclick="confirmerSuppressionIntrant(this)"
-                                    class="inline-flex items-center px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white text-xs font-bold rounded-md transition-colors shadow-sm">
-                                    Supprimer
-                                </button>
-                            </form>
+                                <form action="{{ route('intrants.destroy', $intrant->id) }}" method="POST"
+                                    class="form-delete-intrant inline-block">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="button" onclick="confirmerSuppressionIntrant(this)"
+                                        class="inline-flex items-center px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white text-xs font-bold rounded-md transition-colors shadow-sm">
+                                        Supprimer
+                                    </button>
+                                </form>
+                            @else
+                                {{-- Version désactivée ou discrète pour les simples membres --}}
+                                <span
+                                    class="inline-flex items-center px-2.5 py-1.5 bg-gray-100 text-gray-400 text-xs font-semibold rounded-md cursor-not-allowed opacity-60 border border-gray-200 select-none">
+                                    🔒 Actions restreintes
+                                </span>
+                            @endif
                         </td>
                     </tr>
                 @empty

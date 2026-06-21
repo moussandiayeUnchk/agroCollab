@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             'nom' => "admin",
             'prenom' => "admin",
             'adresse' => 'dakar',
-            'email' => "admin2026@gmail.com",
+            'email' => "admin@gmail.com",
             'password' => Hash::make("Azerty2026"), 
             'num_tel' => 767940477,
             'role' => 'admin',
@@ -81,20 +81,29 @@ class DatabaseSeeder extends Seeder
              )
             ->create();
 
-        // 5. Création de données fictives pour les intrants
-        $categoriesIntrant = ['semence', 'engrais', 'pesticide', 'autre'];
-        $nomsIntrants = [
-            'Semences de maïs hybride',
-            'Engrais NPK 15-15-15',
-            'Herbicide systémique',
-            'Amendement calcaire (Chaux)',
-        ];
+        // Création de données réalistes pour les intrants
+$intrantsExemples = [
+    ['nom' => 'Engrais NPK 15-15-15', 'categorie' => 'engrais', 'max' => 500],
+    ['nom' => 'Urée 46%', 'categorie' => 'engrais', 'max' => 300],
+    ['nom' => 'Semences de maïs hybride', 'categorie' => 'semence', 'max' => 200],
+    ['nom' => 'Semences de riz Certifiées', 'categorie' => 'semence', 'max' => 500],
+    ['nom' => 'Herbicide Systémique', 'categorie' => 'pesticide', 'max' => 100],
+    ['nom' => 'Fongicide Maraîcher', 'categorie' => 'pesticide', 'max' => 150],
+    ['nom' => 'Amendement Calcaire', 'categorie' => 'autre', 'max' => 400],
+];
 
-        Intrant::factory(10)->create([
-            'nom' => fake()->randomElement($nomsIntrants),
-            'quantiteDisponible' => fake()->randomFloat(1, 0.5, 5.5),
-            'categorie' => fake()->randomElement($categoriesIntrant)
-        ]);
+foreach ($intrantsExemples as $exemple) {
+    // On génère un stock actuel aléatoire mais conséquent (ex: entre 30% et 90% du max)
+    $capaciteMax = $exemple['max'];
+    $quantiteStock = fake()->randomFloat(1, $capaciteMax * 0.2, $capaciteMax * 0.95);
+
+    Intrant::factory()->create([
+        'nom' => $exemple['nom'],
+        'categorie' => $exemple['categorie'],
+        'quantiteDisponible' => $quantiteStock,
+        
+    ]);
+}
 
         // 6. Générer 15 Réservations croisées aléatoirement
         for ($i = 0; $i < 15; $i++) {

@@ -65,7 +65,7 @@
                                         {{ $recolte->created_at->translatedFormat('j F Y') }}
                                     </td>
                                     <td class="py-4 px-4 text-gray-900 font-semibold">{{ $recolte->user->nom }}p</td>
-                                    <td class="py-4 px-4">{{ $recolte->categorieProduction }}</td>
+                                    <td class="py-4 px-4">{{ $recolte->produit }}</td>
                                     <td class="py-4 px-4 font-bold">{{ $recolte->quantity }}</td>
                                     <td class="py-4 px-4">
                                         <span
@@ -106,7 +106,6 @@
                                 class="bg-green-100 font-bold text-emerald-700 text-sm  px-4 py-1.5 h-6 flex items-center text-center rounded-full">
                                 En cours
                             </span>
-                        
                         @else
                             <span
                                 class="bg-red-50 font-bold text-red-600 text-sm  px-4 py-1.5 h-6 flex items-center text-center rounded-full">
@@ -123,7 +122,7 @@
                 @endforelse
 
                 <div class="p-4 text-center font-bold text-emerald-600">
-                    <a href="">
+                    <a href="{{ route('materiels.index') }}">
                         Voir toutes les réservations →
                     </a>
                 </div>
@@ -140,16 +139,16 @@
                         <div class="flex justify-between p-4 items-center border-b border-gray-200">
                             <p class="font-bold">État des stocks</p>
                             <div class="bg-emerald-600 text-white text-md font-bold rounded-xl p-2">
-                                <a href="">Voir tout</a>
+                                <a href="{{ route('recoltes.index') }}">Voir tout</a>
                             </div>
                         </div>
                         <!-- on affiche les intrants -->
                         @forelse($intrants as $intrant)
                             @php
                                 /* 
-                                                                    on calcule le pourcentage mais d'abord on sécurise le stock initial en faisant
+                                                                                                    on calcule le pourcentage mais d'abord on sécurise le stock initial en faisant
                                     si le stock initial est > 0 alors on garde la valeur c'est à dire le stock initial
-                                                                    de départ par contre si c'est < 0 alors on lui donne une valeur par défaut = 1
+                                                                                                    de départ par contre si c'est < 0 alors on lui donne une valeur par défaut = 1
                                     car un nombre ne peut pas être divisé par 0 or ici on cherche à calculer le %
                                     )
 
@@ -186,36 +185,66 @@ $couleurBarre = $pourcentage < 30 ? 'bg-red-600' : 'bg-emerald-600';
                     </div>
 
 
+
                     
                     <!-- actions rapides comme Enregistrer un apport ou ajouter un membre  -->
-                    <div class="md:col-span-4 rounded-xl border-2 border-solid shadow-xl p-4  border-gray-200 h-80">
+                    <div
+                        class="md:col-span-4 rounded-xl border-2 border-solid shadow-xl p-4 border-gray-200 h-80 bg-white">
                         <div class="mb-6">
                             <h3 class="text-lg font-bold text-gray-900">Actions Rapides</h3>
                             <p class="text-xs text-gray-400 font-medium mt-0.5">Opérations fréquentes</p>
                         </div>
 
                         <div class="space-y-4">
-                            <a href="#"
-                                class="flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 rounded-xl group transition-colors">
-                                <div>
-                                    <h4 class="font-bold text-emerald-600 text-sm group-hover:text-emerald-700">
-                                        Enregistrer un apport</h4>
-                                    <p class="text-xs text-gray-400 font-medium mt-0.5">Nouvelle entrée récolte</p>
+                            {{-- 1. Enregistrer un apport --}}
+                            @if (auth()->user()->role === 'admin')
+                                <a href="{{ route('recoltes.create') }}"
+                                    class="flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 rounded-xl group transition-colors border border-gray-100">
+                                    <div>
+                                        <h4 class="font-bold text-emerald-600 text-sm group-hover:text-emerald-700">
+                                            Enregistrer un apport</h4>
+                                        <p class="text-xs text-gray-400 font-medium mt-0.5">Nouvelle entrée récolte</p>
+                                    </div>
+                                    <span
+                                        class="text-emerald-600 text-xl font-bold group-hover:translate-x-1 transition-transform">→</span>
+                                </a>
+                            @else
+                                {{-- Version désactivée pour les non-admins --}}
+                                <div
+                                    class="flex items-center justify-between p-4 bg-gray-100 rounded-xl opacity-60 cursor-not-allowed border border-gray-200">
+                                    <div>
+                                        <h4 class="font-bold text-gray-500 text-sm">Enregistrer un apport</h4>
+                                        <p class="text-xs text-gray-400 font-medium mt-0.5">Réservé à l'administration
+                                        </p>
+                                    </div>
+                                    <span class="text-gray-400 text-xl font-bold">🔒</span>
                                 </div>
-                                <span
-                                    class="text-emerald-600 text-xl font-bold group-hover:translate-x-1 transition-transform">→</span>
-                            </a>
+                            @endif
 
-                            <a href="#"
-                                class="flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 rounded-xl group transition-colors">
-                                <div>
-                                    <h4 class="font-bold text-emerald-600 text-sm group-hover:text-emerald-700">Ajouter
-                                        un membre</h4>
-                                    <p class="text-xs text-gray-400 font-medium mt-0.5">Nouveau coopérateur</p>
+                            {{-- 2. Ajouter un membre --}}
+                            @if (auth()->user()->role === 'admin')
+                                <a href="{{ route('membres.create') }}"
+                                    class="flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 rounded-xl group transition-colors border border-gray-100">
+                                    <div>
+                                        <h4 class="font-bold text-emerald-600 text-sm group-hover:text-emerald-700">
+                                            Ajouter un membre</h4>
+                                        <p class="text-xs text-gray-400 font-medium mt-0.5">Nouveau coopérateur</p>
+                                    </div>
+                                    <span
+                                        class="text-emerald-600 text-xl font-bold group-hover:translate-x-1 transition-transform">→</span>
+                                </a>
+                            @else
+                                {{-- Version désactivée pour les non-admins --}}
+                                <div
+                                    class="flex items-center justify-between p-4 bg-gray-100 rounded-xl opacity-60 cursor-not-allowed border border-gray-200">
+                                    <div>
+                                        <h4 class="font-bold text-gray-500 text-sm">Ajouter un membre</h4>
+                                        <p class="text-xs text-gray-400 font-medium mt-0.5">Réservé à l'administration
+                                        </p>
+                                    </div>
+                                    <span class="text-gray-400 text-xl font-bold">🔒</span>
                                 </div>
-                                <span
-                                    class="text-emerald-600 text-xl font-bold group-hover:translate-x-1 transition-transform">→</span>
-                            </a>
+                            @endif
                         </div>
                     </div>
 
