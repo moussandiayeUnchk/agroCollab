@@ -6,7 +6,7 @@
 
     <nav class="flex-1 mt-8 space-y-2 px-4">
 
-        <x-nav-link href="dashboard" :active="request()->routeIs('dashboard')">
+        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard.*')">
             <span>📊</span>
             <span>Tableau de bord</span>
         </x-nav-link>
