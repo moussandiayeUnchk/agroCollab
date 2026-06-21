@@ -4,6 +4,7 @@ use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\IntrantController;
 use App\Http\Controllers\MaterielController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RecolteController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,6 +42,8 @@ Route::get('intrants/{intrant}/reappro', [IntrantController::class, 'editReappro
 Route::put('intrant/{intrant}/reappro', [IntrantController::class, 'updateReappro'])->name('intrants.reappro.update');
 
 
+
+Route::resource('/recoltes',RecolteController::class)->middleware(['auth', 'verified']);
 
 
 Route::middleware('auth')->group(function () {
