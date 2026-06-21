@@ -26,7 +26,7 @@
             <span>Matériels</span>
         </x-nav-link>
 
-        <x-nav-link href="" :active="request()->routeIs('recoltes*')">
+        <x-nav-link :href="route('recoltes.index')" :active="request()->routeIs('recoltes*')">
             <span>🌾</span>
             <span>Récoltes</span>
         </x-nav-link>

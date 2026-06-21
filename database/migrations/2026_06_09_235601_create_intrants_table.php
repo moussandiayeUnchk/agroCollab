@@ -18,7 +18,7 @@ return new class extends Migration
             // Quantité enregistrée lors de la toute première création
             $table->decimal('stock_initial', 8, 2)->default(0.00);
             // Quantité qui évolue au fil des réapprovisionnements et des distributions
-            $table->decimal("quantiteDisponible",8,1);
+            $table->decimal("quantiteDisponible",8,2);
             $table->timestamps();
         });
     }

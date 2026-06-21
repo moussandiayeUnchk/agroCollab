@@ -14,9 +14,12 @@ return new class extends Migration
     {
         Schema::create('recoltes', function (Blueprint $table) {
             $table->id();
-            $table->string("categorieProduction");
-            $table->decimal('quantity', 8, 1);
+            $table->string("produit"); // Ex: Mil, Arachide, Maïs (le produit précis)
+            $table->decimal('quantity', 8, 2);
+            $table->date('date_depot');
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
+            // Le lien vers la catégorie
+            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

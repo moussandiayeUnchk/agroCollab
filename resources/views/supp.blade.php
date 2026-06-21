@@ -1,59 +1,26 @@
-<div class="w-full overflow-x-auto">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Status</th>
-        <th>Date</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>John Doe</td>
-        <td>johndoe@example.com</td>
-        <td><span class="badge badge-soft badge-success text-xs">Professional</span></td>
-        <td>March 1, 2024</td>
-        <td>
-          <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"><span class="icon-[tabler--pencil] size-5"></span></button>
-          <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"><span class="icon-[tabler--trash] size-5"></span></button>
-          <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"><span class="icon-[tabler--dots-vertical] size-5"></span></button>
-        </td>
-      </tr>
-      <tr>
-        <td>Jane Smith</td>
-        <td>janesmith@example.com</td>
-        <td><span class="badge badge-soft badge-error text-xs">Rejected</span></td>
-        <td>March 2, 2024</td>
-        <td>
-          <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"><span class="icon-[tabler--pencil] size-5"></span></button>
-          <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"><span class="icon-[tabler--trash] size-5"></span></button>
-          <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"><span class="icon-[tabler--dots-vertical] size-5"></span></button>
-        </td>
-      </tr>
-      <tr>
-        <td>Alice Johnson</td>
-        <td>alicejohnson@example.com</td>
-        <td><span class="badge badge-soft badge-info text-xs">Applied</span></td>
-        <td>March 3, 2024</td>
-        <td>
-          <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"><span class="icon-[tabler--pencil] size-5"></span></button>
-          <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"><span class="icon-[tabler--trash] size-5"></span></button>
-          <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"><span class="icon-[tabler--dots-vertical] size-5"></span></button>
-        </td>
-      </tr>
-      <tr>
-        <td>Bob Brown</td>
-        <td>bobrown@example.com</td>
-        <td><span class="badge badge-soft badge-primary text-xs">Current</span></td>
-        <td>March 4, 2024</td>
-        <td>
-          <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"><span class="icon-[tabler--pencil] size-5"></span></button>
-          <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"><span class="icon-[tabler--trash] size-5"></span></button>
-          <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"><span class="icon-[tabler--dots-vertical] size-5"></span></button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<div class="flex mt-5 justify-evenly ">
+        <div
+            class="flex flex-col border-b-4 border-b-green-600 justify-center items-center shadow-md w-60 h-40 p-4 rounded-md space-y-2 ">
+            <p class="text-3xl font-bold"></p>
+            <p class="text-xl text-gray-400 font-bold">Membre actifs</p>
+        </div>
+
+        <div
+            class="flex flex-col border-b-4 border-b-orange-600 justify-center items-center shadow-xl w-60 h-40 p-4 rounded-md space-y-2 ">
+            <p class="text-3xl font-bold"></p>
+            <p class="text-xl text-gray-400 font-bold">Volume de récoltes</p>
+        </div>
+
+        <div
+            class="flex flex-col border-b-4  border-b-purple-600 justify-center items-center shadow-xl w-60 h-40 p-4 rounded-md space-y-2 ">
+            <p class="text-3xl font-bold"></p>
+            <p class="text-xl text-gray-400 font-bold">Matériels disponibles</p>
+        </div>
+
+        <div
+            class="flex flex-col border-b-4  border-b-red-600 justify-center items-center shadow-xl w-60 h-40 p-4 rounded-md space-y-2 ">
+            <p class="text-3xl font-bold">/p>
+            <p class="text-xl text-gray-400 font-bold">Alertes stock bas</p>
+        </div>
+
+    </div>
