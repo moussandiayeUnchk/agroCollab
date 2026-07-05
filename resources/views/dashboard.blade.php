@@ -7,7 +7,7 @@
 
     <h3 class="text-xl font-bold">Vue d'ensemble</h3>
 
-    <!-- infos ou statistiques sur les sur les éléments de la coopértive  -->
+    <!-- infos ou statistiques sur les sur les éléments de la coopérative  -->
     <div class="flex mt-5 justify-evenly ">
         <div
             class="flex flex-col border-b-4 border-b-green-600 justify-center items-center shadow-md w-60 h-40 p-4 rounded-md space-y-2 ">

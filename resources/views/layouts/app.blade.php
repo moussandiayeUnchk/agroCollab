@@ -30,30 +30,49 @@
                             {{ $header }}
                         </div>
 
+                        <!-- ZONE DROPDOWN UTILISATEUR CORRIGÉE -->
                         <div class="flex items-center">
-                            <x-dropdown align="right" width="48">
-                                <x-slot name="trigger">
-                                    <button class="inline-flex items-center justify-center rounded-full bg-purple-600 hover:bg-purple-700 text-white font-bold w-10 h-10 shadow transition ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 cursor-pointer">
-                                        {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
-                                    </button>
-                                </x-slot>
+                            <div class="relative ms-3" x-data="{ open: false }">
+                                <!-- Bouton Avatar (Déclencheur) -->
+                                <button @click="open = !open" @click.away="open = false" class="inline-flex items-center justify-center rounded-full bg-purple-600 hover:bg-purple-700 text-white font-bold w-10 h-10 shadow transition ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 cursor-pointer uppercase select-none">
+                                    {{ strtoupper(substr(auth()->user()->prenom ?? auth()->user()->nom ?? 'U', 0, 1)) }}
+                                </button>
 
-                                <x-slot name="content">
-                                    <x-dropdown-link :href="route('profile.edit')">
-                                        {{ __('Mon Profil') }}
-                                    </x-dropdown-link>
+                                <!-- Menu déroulant fluide -->
+                                <div x-show="open" 
+                                     x-transition:enter="transition ease-out duration-100"
+                                     x-transition:enter-start="transform opacity-0 scale-95"
+                                     x-transition:enter-end="transform opacity-100 scale-100"
+                                     x-transition:leave="transition ease-in duration-75"
+                                     x-transition:leave-start="transform opacity-100 scale-100"
+                                     x-transition:leave-end="transform opacity-0 scale-95"
+                                     class="absolute right-0 mt-2 w-52 rounded-md shadow-xl py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50" 
+                                     style="display: none;">
+                                    
+                                    <!-- En-tête : Informations de la personne connectée -->
+                                    <div class="px-4 py-2 border-b border-gray-100 bg-gray-50/50">
+                                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Session active</p>
+                                        <p class="text-sm font-bold text-gray-900 truncate mt-0.5">
+                                            {{ auth()->user()->prenom }} {{ auth()->user()->nom }}
+                                        </p>
+                                    </div>
 
-                                    <form method="POST" action="{{ route('logout') }}">
-                                        @csrf
-                                        <x-dropdown-link :href="route('logout')"
-                                                onclick="event.preventDefault();
-                                                            this.closest('form').submit();"
-                                                class="text-red-600 hover:text-red-700 font-medium">
-                                            {{ __('Se déconnecter') }}
-                                        </x-dropdown-link>
-                                    </form>
-                                </x-slot>
-                            </x-dropdown>
+                                    <!-- Lien vers le profil -->
+                                    <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
+                                        ⚙️ Mon Profil
+                                    </a>
+
+                                    <!-- Bouton de Déconnexion sécurisé via POST -->
+                                    <div class="border-t border-gray-100 mt-1">
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+                                            <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 font-bold transition-colors">
+                                                🚪 Se déconnecter
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                     </div>

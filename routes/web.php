@@ -8,9 +8,9 @@ use App\Http\Controllers\RecolteController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('dashboard');
-}); 
+});  */
 
 Route::get('/dashboard',[DashBoardController::class,'index'])->middleware(['auth','verified'])->name('dashboard');
 
