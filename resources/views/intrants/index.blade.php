@@ -110,7 +110,7 @@
                                     </button>
                                 </form>
                             @else
-                                {{-- Version désactivée ou discrète pour les simples membres --}}
+                                {{-- Version désactivée ou discrète pour les simples membres  --}}
                                 <span
                                     class="inline-flex items-center px-2.5 py-1.5 bg-gray-100 text-gray-400 text-xs font-semibold rounded-md cursor-not-allowed opacity-60 border border-gray-200 select-none">
                                     🔒 Actions restreintes
