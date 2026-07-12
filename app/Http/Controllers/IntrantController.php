@@ -71,7 +71,30 @@ class IntrantController extends Controller
         return redirect()->route('intrants.index')
             ->with('success', "Le stock de {$intrant->nom} a été réapprovisionné avec succès !");
     }
+/**
+     * Afficher le formulaire de modification général d'un intrant.
+     */
+    public function edit(Intrant $intrant)
+    {
+        // On renvoie votre vue 'edit.blade.php' en lui passant l'intrant
+        return view('intrants.edit', compact('intrant'));
+    }
 
+    /**
+     * Mettre à jour les informations globales de l'intrant.
+     */
+    public function update(Request $request, Intrant $intrant)
+    {
+        $validated = $request->validate([
+            'nom' => 'required|string|max:255',
+            'categorie' => 'required|string|in:Semences,Engrais,Produits phytos',
+            'quantiteDisponible' => 'required|numeric|min:0',
+        ]);
+
+        $intrant->update($validated);
+
+        return redirect()->route('intrants.index')->with('success', 'L\'intrant a été modifié avec succès !');
+    }
     public function destroy(Intrant $intrant){
         
 
